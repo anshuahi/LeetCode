@@ -1,7 +1,6 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-// 15 45 20 2 34 35 5 44 32 30
 int main(){
 
     int n;
