@@ -25,7 +25,7 @@ public:
         int ans = 0, b = 0;
         b = price[i];
         ans = price[i];
-        if(inc){
+        if(inc && ans){
             ans = price[i]/2;
             for(auto x: gr[i]){
                 if(x != parent){
@@ -40,14 +40,14 @@ public:
             return min(ans, b);
             
         }
-        else {
-            for(auto x: gr[i]){
-                if(x != parent){
-                    b += count(x, i, gr, price, true);
-                }
+
+        for(auto x: gr[i]){
+            if(x != parent){
+                b += count(x, i, gr, price, true);
             }
-            return b;
         }
+        return b;
+
         
     }
     
