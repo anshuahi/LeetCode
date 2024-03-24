@@ -8,6 +8,14 @@
  *     ListNode(int x, ListNode *next) : val(x), next(next) {}
  * };
  */
+/*
+    1. Set 2 pointers slow & fast with strides 1 & 2. 
+    2. Traverse till fast reaching the end
+    3. reverse the slow->next(second half of the list)
+    4. merge the Lists
+*/
+
+
 class Solution {
 public:
    
