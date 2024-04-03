@@ -7,6 +7,8 @@ using namespace std;
 #define pb push_back
 #define pii pair<int, int>
 
+    vector<int> x = {0, 0, -1, 1};
+    vector<int> y = {-1, 1, 0, 0};
 
     // check if a char is vowel
     bool isVowel(char c){
