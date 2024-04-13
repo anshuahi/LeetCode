@@ -13,37 +13,37 @@ SpaceComplexity: O(N)
 
 class Solution
 {
-public
-    String removeKdigits(String num, int k)
+public:
+    string removeKdigits(string num, int k)
     {
-        Stack<Character> st = new Stack<>();
-        for (char digit : num.toCharArray())
+        stack<char> st;
+        for (auto c : num)
         {
-            while (!st.isEmpty() && k > 0 && Character.compare(st.peek(), digit) > 0)
+            while (!st.empty() && k && st.top() > c)
             {
                 st.pop();
                 k--;
             }
-            if (st.isEmpty() && Character.compare('0', digit) == 0)
-            {
-                continue;
-            }
-            st.add(digit);
+            st.push(c);
         }
-        while (!st.isEmpty() && k > 0)
+        while (!st.empty() && k)
         {
             st.pop();
             k--;
         }
-
-        StringBuilder result = new StringBuilder();
-        while (!st.isEmpty())
+        num = "";
+        while (!st.empty())
         {
-            result.append(st.pop());
+            num += st.top();
+            st.pop();
         }
-        result.reverse();
-        if (result.length() == 0)
-            result.append("0");
-        return result.toString();
+        // remove appended zeros
+        while (num.size() && num.back() == '0')
+        {
+            num.pop_back();
+        }
+
+        reverse(num.begin(), num.end());
+        return (num == "") ? "0" : num;
     }
-}
+};
