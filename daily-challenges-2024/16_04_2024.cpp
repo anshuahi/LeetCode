@@ -1,65 +1,47 @@
 /*
-GeeksForGeeks-POTD: Minimize the Difference
+LeetCode-POTD: 623. Add One Row to Tree
 
+POTD Link - https://leetcode.com/problems/add-one-row-to-tree/description
 
-POTD Link: https://www.geeksforgeeks.org/problems/minimize-the-difference/1
+GitHub Solution Link- https://github.com/anshuahi/LeetCode/blob/main/daily-challenges-2024/16_04_2024.cpp
 
-Approach
-    1. save the prefix min and max, and suffix min and max.
-    2. remove the subarray of size k and calculate min and max from above arrays
-    3. store the diff to ans.
-
-TimeComplexity: O(N)
-SpaceComplexity: O(N)
+Approach :
+    1. go to depth=2, and insert the new node in the next level
+    2. insert the new node recursively at all place(@depth)
 
 */
-
+/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
+ *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+ *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
+ * };
+ */
 class Solution
 {
 public:
-    void printArray(vector<int> &v)
+    TreeNode *addOneRow(TreeNode *root, int val, int depth)
     {
-        for (int x : v)
+        if (depth == 1)
         {
-            cout << x << " ";
+            return new TreeNode(val, root, NULL);
         }
-        cout << endl;
-    }
-
-    int minimizeDifference(int n, int k, vector<int> &arr)
-    {
-        vector<int> minSt(n), minEn(n), maxSt(n), maxEn(n);
-        int mn = arr[0];
-        int mx = arr[0];
-        for (int i = 0; i < n; i++)
+        if (!root)
         {
-            mn = min(mn, arr[i]);
-            mx = max(mx, arr[i]);
-            minSt[i] = mn;
-            maxSt[i] = mx;
+            return root;
         }
-        mn = arr[n - 1];
-        mx = arr[n - 1];
-
-        for (int i = n - 1; i >= 0; i--)
+        if (depth == 2)
         {
-            mn = min(mn, arr[i]);
-            mx = max(mx, arr[i]);
-            minEn[i] = mn;
-            maxEn[i] = mx;
+            root->left = new TreeNode(val, root->left, NULL);
+            root->right = new TreeNode(val, NULL, root->right);
+            return root;
         }
-
-        int ans = abs(minEn[k] - maxEn[k]);
-        for (int i = 0; i < n; i++)
-        {
-            if (i + k + 1 < n)
-            {
-                int a = min(minSt[i], minEn[i + k + 1]);
-                int b = max(maxSt[i], maxEn[i + k + 1]);
-                ans = min(ans, abs(a - b));
-            }
-        }
-        ans = min(ans, abs(minSt[n - k - 1] - maxSt[n - k - 1]));
-        return ans;
+        root->left = addOneRow(root->left, val, depth - 1);
+        root->right = addOneRow(root->right, val, depth - 1);
+        return root;
     }
 };
