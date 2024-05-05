@@ -17,9 +17,11 @@ Approach
  *     ListNode(int x) : val(x), next(NULL) {}
  * };
  */
-class Solution {
+class Solution
+{
 public:
-    void deleteNode(ListNode* node) {
+    void deleteNode(ListNode *node)
+    {
         *node = *(node->next);
     }
 };
