@@ -1,5 +1,5 @@
 /*
-LeetCode-POTD: 2678. Number of Senior Citizens
+LeetCode-POTD: 2028. Find Missing Observations
 
 POTD Link - https://leetcode.com/problems/find-missing-observations/description/
 
